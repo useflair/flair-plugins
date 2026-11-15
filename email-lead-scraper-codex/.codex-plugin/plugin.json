@@ -6,7 +6,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/email-lead-scraper",
+  "homepage": "https://marketplace.useflair.io/agents/email-lead-scraper",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,7 @@
     "longDescription": "Finds fresh, verified-email leads matching your description every day and adds them to your Google Sheet. Runs hosted; install to use it.",
     "developerName": "flair",
     "category": "Sales & Marketing",
-    "websiteURL": "https://marketplace.useflair.io/marketplace/agents/email-lead-scraper",
+    "websiteURL": "https://marketplace.useflair.io/agents/email-lead-scraper",
     "logo": "./assets/logo.svg",
     "composerIcon": "./assets/logo.svg"
   }

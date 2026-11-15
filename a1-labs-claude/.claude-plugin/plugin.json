@@ -7,7 +7,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/a1-labs",
+  "homepage": "https://marketplace.useflair.io/agents/a1-labs",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [

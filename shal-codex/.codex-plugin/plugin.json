@@ -6,7 +6,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/shal",
+  "homepage": "https://marketplace.useflair.io/agents/shal",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [
@@ -25,7 +25,7 @@
     "longDescription": "Evidence-based website reviews delivered as a polished PDF deck \u2014 measured accessibility and performance, annotated redlines, concepts, and an honest recommendation that can be \"no redesign needed\". Start with a free single-page review, then build and deploy through GitHub and Vercel. Runs hosted; install to use it.",
     "developerName": "flair",
     "category": "Development",
-    "websiteURL": "https://marketplace.useflair.io/marketplace/agents/shal",
+    "websiteURL": "https://marketplace.useflair.io/agents/shal",
     "logo": "./assets/logo.jpg",
     "composerIcon": "./assets/logo.jpg"
   }

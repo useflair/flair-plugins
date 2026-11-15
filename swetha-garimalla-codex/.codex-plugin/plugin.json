@@ -6,7 +6,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/swetha-garimalla",
+  "homepage": "https://marketplace.useflair.io/agents/swetha-garimalla",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [
@@ -23,7 +23,7 @@
     "longDescription": "Assesses AI-native biotech companies from their SEC filings, pipeline, patents, people, customers, insiders, earnings and news \u2014 a commercial-viability verdict with an FCF/ROIC workbook, and a read on whether the company is steered by investors, employees or clients. Runs hosted; install to use it.",
     "developerName": "flair",
     "category": "Research",
-    "websiteURL": "https://marketplace.useflair.io/marketplace/agents/swetha-garimalla",
+    "websiteURL": "https://marketplace.useflair.io/agents/swetha-garimalla",
     "logo": "./assets/logo.png",
     "composerIcon": "./assets/logo.png"
   }

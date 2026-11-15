@@ -6,7 +6,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/a1-labs",
+  "homepage": "https://marketplace.useflair.io/agents/a1-labs",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [
@@ -24,7 +24,7 @@
     "longDescription": "Paste in a messy marketplace case and get the verdict, the internal playbook, and a ready-to-send reply \u2014 written the way an experienced trust & safety ops lead would handle it. Runs hosted; install to use it.",
     "developerName": "flair",
     "category": "Customer Support",
-    "websiteURL": "https://marketplace.useflair.io/marketplace/agents/a1-labs",
+    "websiteURL": "https://marketplace.useflair.io/agents/a1-labs",
     "logo": "./assets/logo.svg",
     "composerIcon": "./assets/logo.svg"
   }

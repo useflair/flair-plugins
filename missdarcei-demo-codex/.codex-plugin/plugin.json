@@ -6,7 +6,7 @@
     "name": "flair",
     "url": "https://useflair.io"
   },
-  "homepage": "https://marketplace.useflair.io/marketplace/agents/missdarcei-demo",
+  "homepage": "https://marketplace.useflair.io/agents/missdarcei-demo",
   "repository": "https://github.com/useflair/flair-plugins",
   "license": "MIT",
   "keywords": [
@@ -25,7 +25,7 @@
     "longDescription": "Turn a selfie and beauty inspiration into chat-previewed makeup simulations, annotated placement maps, and a sourced personalized plan. Runs hosted; install to use it.",
     "developerName": "flair",
     "category": "Beauty & Personal Care",
-    "websiteURL": "https://marketplace.useflair.io/marketplace/agents/missdarcei-demo",
+    "websiteURL": "https://marketplace.useflair.io/agents/missdarcei-demo",
     "logo": "./assets/logo.jpg",
     "composerIcon": "./assets/logo.jpg"
   }
