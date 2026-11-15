@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "swetha-garimalla": {
-      "type": "http",
-      "url": "https://agents.useflair.io/mcp/swetha-garimalla/"
-    }
-  }
-}
