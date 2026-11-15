@@ -2,7 +2,7 @@
 name: flair-builder
 description: Build and publish your own expert agent to the flair marketplace. Use when a domain expert wants to turn their process into a hosted agent that others can install and use.
 ---
-<!-- GENERATED from builder/skill/ (core.md + local.md). Edit those, then: python -m newb.marketplace.builder_skill -->
+<!-- GENERATED from builder/skill/ (core.md + local.md). Edit those, then: python -m useflair.marketplace.builder_skill -->
 
 # flair builder — build & publish an expert agent from your own machine
 
@@ -28,7 +28,7 @@ You are the builder's assistant. The scripts live next to this file under
 | **List models** | `dev_models` |
 | Fetch a published agent | `get_agent_source` (connector) → `dev_install` |
 | Publish | `python3 scripts/publish_agent.py <dir>` · `dev_prepare_publish` → `publish_bundle` (connector) |
-| Browse | `search_agents` · `get_agent` on the `newb-marketplace` connector |
+| Browse | `search_agents` · `get_agent` on the `flair-marketplace` connector |
 
 Browse what already exists before building: `search_agents(query?)`,
 `get_agent(agent_id)`.
@@ -41,7 +41,7 @@ Browse what already exists before building: `search_agents(query?)`,
 3. Edit the files: `SKILL.md`, `.codex-plugin/plugin.json` (the services),
    `rubrics/`, `.mcp.json`, `evals/cases/`. Remove every scaffold TODO.
 4. **Validate** — `python3 scripts/validate_agent.py ./agents/<slug>` (needs
-   the newb repo on PYTHONPATH; in a sandbox without it, use the connector's
+   the flair repo on PYTHONPATH; in a sandbox without it, use the connector's
    `validate_agent` with `bundle_base64` from
    `publish_agent.py --prepare --emit-b64`). It prints the A2A agent card
    consumers see, every floor, and every problem staging would reject.
@@ -51,7 +51,7 @@ Browse what already exists before building: `search_agents(query?)`,
 
 - **Slug** (lowercase hyphen-case; it is the URL) and **display name**.
 - **One sentence** on what the agent does for its client — the listing blurb.
-- **Tags + category**, and a **logo** if they have one (`newb.logo` = a bundle
+- **Tags + category**, and a **logo** if they have one (`flair.logo` = a bundle
   asset path like `assets/logo.png` or an https URL; every agent gets a
   generated mark for free, so skip it if they have none).
 - **Services** — 2–4 concrete offerings. Each is a tool the buyer pays for;
@@ -311,7 +311,7 @@ on the CLI's default locally, and the report says so.
 
 A service can return more than text — a chart, a diagram, a document. The
 agent's tools upload the file and return its URL; never raw bytes. A hosted
-run finds `NEWB_BLOB_UPLOAD_URL` and `NEWB_BLOB_UPLOAD_TOKEN` in its env:
+run finds `FLAIR_BLOB_UPLOAD_URL` and `FLAIR_BLOB_UPLOAD_TOKEN` in its env:
 POST the bytes there (Node `fetch`; the sandbox has Node 20 and npx, no
 curl or python) and put the returned durable URL in the tool's file
 reference, or link it in the reply as `[Title](url)` on its own line — the
@@ -324,7 +324,7 @@ itself kept to a few sentences. Reference files the expert attached under
 ## Update an existing agent
 
 "Run shal on dev" means load `shal`, not scaffold a fresh agent. Two steps,
-and **no second sign-in** — connecting the `newb-marketplace` connector
+and **no second sign-in** — connecting the `flair-marketplace` connector
 already signed the expert in:
 
 0. **`dev_use(<slug>)` FIRST.** A bundle already on disk (`./agents/<slug>`)

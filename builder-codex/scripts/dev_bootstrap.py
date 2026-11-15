@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Launch the `newb-dev` MCP server, installing it first if need be.
+"""Launch the `flair-dev` MCP server, installing it first if need be.
 
 Claude Code runs this over stdio when the flair-builder plugin loads, so it must
 be stdlib-only (the machine may have nothing else) and it must hand the stdio
@@ -8,11 +8,11 @@ as MCP protocol traffic.
 
 Resolution order, cheapest first:
 
-1. ``NEWB_DEV_SERVER_CMD`` — explicit override, for anyone running from a repo
-   checkout (e.g. ``pipenv run newb-dev-server``).
-2. ``newb.marketplace.devserver`` already importable by this interpreter.
-3. ``newb-dev-server`` already on PATH.
-4. A managed venv at ``~/.newb/dev-venv`` — created and installed into once,
+1. ``FLAIR_DEV_SERVER_CMD`` — explicit override, for anyone running from a repo
+   checkout (e.g. ``pipenv run flair-dev-server``).
+2. ``useflair.marketplace.devserver`` already importable by this interpreter.
+3. ``flair-dev-server`` already on PATH.
+4. A managed venv at ``~/.flair/dev-venv`` — created and installed into once,
    then reused. First launch is slow; later ones are immediate.
 
 Failure is LOUD. A bootstrap that dies quietly leaves the expert with a server
@@ -30,11 +30,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Where to install from. newb is not on PyPI yet, so the default is the repo.
+# Where to install from. flair is not on PyPI yet, so the default is the repo.
 # Override to pin a fork or a tag — or to point at a local checkout, which is
-# what anyone working ON newb wants:
+# what anyone working ON flair wants:
 #
-#   NEWB_DEV_INSTALL_SPEC="-e /path/to/newb"
+#   FLAIR_DEV_INSTALL_SPEC="-e /path/to/flair"
 #
 # A spec that leads with an option is shell-split, so `-e <path>` works; an
 # editable install means repo edits reach the dev server with no reinstall.
@@ -45,24 +45,24 @@ from pathlib import Path
 # installs nothing either way). The [graph] extra is the graph runtime
 # (LangGraph + the SQLite checkpoint), so graph services run locally too.
 DEFAULT_SPEC = os.environ.get(
-    "NEWB_DEV_INSTALL_SPEC",
-    "newb[temporal,graph] @ git+https://github.com/newbworks/newb.git")
+    "FLAIR_DEV_INSTALL_SPEC",
+    "useflair[temporal,graph] @ git+https://github.com/newbworks/newb.git")
 VENV_DIR = Path(os.environ.get(
-    "NEWB_DEV_VENV", str(Path.home() / ".newb" / "dev-venv")))
-ENTRY = "newb-dev-server"
+    "FLAIR_DEV_VENV", str(Path.home() / ".flair" / "dev-venv")))
+ENTRY = "flair-dev-server"
 # What the venv was last installed from. A changed spec (a new extra, a
 # pinned fork) reinstalls on the next launch instead of silently serving an
 # older install forever — the way the graph extra would otherwise never
 # reach an expert who installed the plugin before it existed.
-SPEC_STAMP = VENV_DIR / ".newb-install-spec"
+SPEC_STAMP = VENV_DIR / ".flair-install-spec"
 
 
 def install_args(spec: str) -> list:
     """The pip arguments for an install spec.
 
     A spec is ONE requirement unless it leads with an option (``-e <path>``,
-    ``--pre newb``). A PEP 508 direct reference such as
-    ``newb[graph] @ git+https://…`` contains spaces that pip must see inside a
+    ``--pre flair``). A PEP 508 direct reference such as
+    ``useflair[graph] @ git+https://…`` contains spaces that pip must see inside a
     single argument: shell-splitting it hands pip a bare ``@``, pip rejects
     that, and the server dies on every launch — which is what the default
     spec did until this helper existed."""
@@ -74,7 +74,7 @@ def install_args(spec: str) -> list:
 
 def die(problem: str, fix: str) -> "NoReturn":  # noqa: F821
     sys.stderr.write(
-        f"\nnewb-dev could not start.\n\n  {problem}\n\n  Fix: {fix}\n\n"
+        f"\nflair-dev could not start.\n\n  {problem}\n\n  Fix: {fix}\n\n"
         "  (This is the local dev server for building your own expert agent. "
         "The rest of the flair-builder plugin still works without it.)\n\n")
     sys.exit(1)
@@ -88,7 +88,7 @@ def exec_server(argv: list) -> "NoReturn":  # noqa: F821
     except OSError as exc:
         die(f"could not launch {argv[0]}: {exc}",
             "check the file exists and is executable, or set "
-            "NEWB_DEV_SERVER_CMD to a working command.")
+            "FLAIR_DEV_SERVER_CMD to a working command.")
 
 
 def venv_bin(name: str) -> Path:
@@ -97,7 +97,7 @@ def venv_bin(name: str) -> Path:
 
 
 def ensure_venv() -> Path:
-    """Create ~/.newb/dev-venv and install newb into it. Returns the entry point."""
+    """Create ~/.flair/dev-venv and install flair into it. Returns the entry point."""
     entry = venv_bin(ENTRY)
     try:
         stamped = SPEC_STAMP.read_text(encoding="utf-8").strip()
@@ -107,9 +107,9 @@ def ensure_venv() -> Path:
         return entry
 
     sys.stderr.write(
-        ("newb-dev: the dev server's install spec changed — updating it in "
+        ("flair-dev: the dev server's install spec changed — updating it in "
          if entry.is_file() else
-         "newb-dev: first launch — installing the local dev server into ")
+         "flair-dev: first launch — installing the local dev server into ")
         + f"{VENV_DIR}. This takes a minute; later launches are instant.\n")
     if not (VENV_DIR / "pyvenv.cfg").is_file():
         try:
@@ -119,7 +119,7 @@ def ensure_venv() -> Path:
         except Exception as exc:  # noqa: BLE001
             die(f"could not create a virtualenv at {VENV_DIR}: {exc}",
                 "ensure python3 has the `venv` module (on Debian/Ubuntu: "
-                "apt install python3-venv), or set NEWB_DEV_VENV to a "
+                "apt install python3-venv), or set FLAIR_DEV_VENV to a "
                 "writable path.")
 
     python = venv_bin("python")
@@ -140,15 +140,15 @@ def ensure_venv() -> Path:
             "delete that directory and reload the plugin to rebuild it.")
     if proc.returncode != 0:
         detail = (proc.stderr or proc.stdout or "").strip()[-800:]
-        die(f"installing newb failed:\n\n{detail}",
+        die(f"installing flair failed:\n\n{detail}",
             f"if this is a network or auth error, check access to {DEFAULT_SPEC}. "
             f"Otherwise delete {VENV_DIR} and reload the plugin to retry.")
 
     entry = venv_bin(ENTRY)
     if not entry.is_file():
-        die(f"newb installed but {ENTRY} is not in {VENV_DIR}.",
+        die(f"flair installed but {ENTRY} is not in {VENV_DIR}.",
             "the installed version may predate the dev server — reinstall from "
-            "a newer newb, or set NEWB_DEV_SERVER_CMD to run it directly.")
+            "a newer flair, or set FLAIR_DEV_SERVER_CMD to run it directly.")
     try:
         SPEC_STAMP.write_text(DEFAULT_SPEC + "\n", encoding="utf-8")
     except OSError:
@@ -157,19 +157,19 @@ def ensure_venv() -> Path:
 
 
 def main() -> None:
-    override = os.environ.get("NEWB_DEV_SERVER_CMD", "").strip()
+    override = os.environ.get("FLAIR_DEV_SERVER_CMD", "").strip()
     if override:
         parts = shlex.split(override)
         resolved = shutil.which(parts[0])
         if not resolved:
-            die(f"NEWB_DEV_SERVER_CMD points at {parts[0]!r}, which is not on PATH.",
+            die(f"FLAIR_DEV_SERVER_CMD points at {parts[0]!r}, which is not on PATH.",
                 "correct the variable or unset it to use the managed install.")
         exec_server([resolved] + parts[1:])
 
     # Already importable here (a repo checkout, or a venv this script is
     # running inside): skip every install path.
     try:
-        from newb.marketplace.devserver import main as serve  # noqa: PLC0415
+        from useflair.marketplace.devserver import main as serve  # noqa: PLC0415
 
         serve()
         return

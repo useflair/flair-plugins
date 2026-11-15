@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Scaffold a new expert-agent bundle for the newb marketplace.
+"""Scaffold a new expert-agent bundle for the flair marketplace.
 
-Standalone (no newb import) so experts can run it anywhere. Writes a
+Standalone (no flair import) so experts can run it anywhere. Writes a
 bundle skeleton conforming to docs/marketplace/bundle-spec.md; validate it
 afterwards with validate_agent.py.
 
@@ -28,7 +28,7 @@ def plugin_json(name: str) -> dict:
         "name": name,
         "category": "[TODO: category, e.g. Career]",
         "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
-        "newb": {
+        "flair": {
             "display_name": titleize(name),
             "description": "[TODO: one sentence — what this agent does for the user]",
             "version": "0.1.0",
@@ -123,9 +123,9 @@ Static files shipped inside the bundle and served by the executor.
 Drop a logo here (`.png .jpg .jpeg .svg .webp .gif`) and point the manifest at
 it:
 
-    "newb": { "logo": "assets/logo.png", ... }
+    "flair": { "logo": "assets/logo.png", ... }
 
-Omit `newb.logo` entirely to use a generated flair placeholder while you build.
+Omit `flair.logo` entirely to use a generated flair placeholder while you build.
 Before the agent goes live the first time it needs a real image of you: set it
 in the builder's last step ("Listing & go live").
 """
@@ -166,9 +166,9 @@ def main() -> int:
     write(root / "examples" / "example-run.json",
           json.dumps(EXAMPLE_JSON, indent=2) + "\n", args.force)
     write(root / "rubrics" / "do_thing.md", RUBRIC_MD, args.force)
-    # Where a shipped logo goes. Optional — omit newb.logo to use the generated
+    # Where a shipped logo goes. Optional — omit flair.logo to use the generated
     # mark. To use your own, drop the image here and set
-    # "newb": { "logo": "assets/logo.png" } in plugin.json.
+    # "flair": { "logo": "assets/logo.png" } in plugin.json.
     write(root / "assets" / "README.md", ASSETS_README, args.force)
 
     print(
@@ -176,7 +176,7 @@ def main() -> int:
         "remove every [TODO], then run:\n"
         f"  python3 scripts/validate_agent.py {root}\n"
         "Optional: add a logo — drop an image in assets/ and set "
-        '"newb": {"logo": "assets/logo.png"} in plugin.json (or omit it to use '
+        '"flair": {"logo": "assets/logo.png"} in plugin.json (or omit it to use '
         "the auto-generated mark)."
     )
     return 0

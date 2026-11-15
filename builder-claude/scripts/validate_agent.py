@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate an expert-agent bundle and print its derived A2A Agent Card.
 
-Runs the SAME checks `newb agent validate` and the `dev_use` MCP tool run —
+Runs the SAME checks `flair agent validate` and the `dev_use` MCP tool run —
 not a lighter local-only pass. Beyond loading the bundle (the real loader, so
 this matches what the executor enforces at publish), that means: leftover
 [TODO …] placeholders, SKILL.md compactness, skill id/description coherence,
@@ -20,7 +20,7 @@ import json
 import sys
 from pathlib import Path
 
-# Bootstrap sys.path to the repo root so `newb` imports resolve when this
+# Bootstrap sys.path to the repo root so `flair` imports resolve when this
 # is run from anywhere.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
@@ -35,10 +35,10 @@ def main() -> int:
     root = Path(sys.argv[1])
 
     try:
-        from newb.marketplace.scaffold import validate_bundle
+        from useflair.marketplace.scaffold import validate_bundle
     except ImportError as exc:  # pragma: no cover - environment issue
-        print(f"error: could not import newb.marketplace.scaffold: {exc}", file=sys.stderr)
-        print("Run from the newb repo (or ensure it is on PYTHONPATH).", file=sys.stderr)
+        print(f"error: could not import useflair.marketplace.scaffold: {exc}", file=sys.stderr)
+        print("Run from the flair repo (or ensure it is on PYTHONPATH).", file=sys.stderr)
         return 2
 
     ok, problems, bundle = validate_bundle(root)

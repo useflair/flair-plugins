@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Publish an expert-agent bundle to the newb marketplace.
+"""Publish an expert-agent bundle to the flair marketplace.
 
 Building is local and needs no auth. Publishing signs you in (OAuth, in your
-browser) and uploads the bundle through the newb lobby, which stages it on the
+browser) and uploads the bundle through the flair lobby, which stages it on the
 executor for you — so you never hold a shared token. Finish on the configure
 page it prints to go live.
 
@@ -61,7 +61,7 @@ def _denylisted(rel_posix_path: str) -> bool:
 # Directories where a bundle conventionally ships MULTIPLE files the
 # manifest never names individually — mirrors bundle.py's
 # BUNDLE_CONVENTIONAL_DIRS, duplicated here since this script must stay
-# stdlib-only (no import of the full newb.marketplace.bundle module, which
+# stdlib-only (no import of the full useflair.marketplace.bundle module, which
 # pulls in pydantic and the rest of the package).
 _CONVENTIONAL_DIRS = {"scripts", "examples", "assets", "rubrics"}
 
@@ -81,7 +81,7 @@ def _declared_paths(d: Path) -> set:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return paths
-    ext = manifest.get("newb") if isinstance(manifest, dict) else None
+    ext = manifest.get("flair") if isinstance(manifest, dict) else None
     for skill in (ext or {}).get("skills") or []:
         if not isinstance(skill, dict):
             continue
@@ -176,7 +176,7 @@ class _CallbackHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"<html><body><h3>Signed in to newb.</h3>"
+        self.wfile.write(b"<html><body><h3>Signed in to flair.</h3>"
                          b"You can close this tab and return to your terminal.</body></html>")
 
     def log_message(self, *_a):  # silence the default request logging
@@ -268,17 +268,17 @@ def _oauth_login(lobby: str) -> str:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Publish a bundle to the newb marketplace.")
+    ap = argparse.ArgumentParser(description="Publish a bundle to the flair marketplace.")
     ap.add_argument("bundle_dir", nargs="?", help="path to the agent bundle directory")
     ap.add_argument("--lobby", default=DEFAULT_LOBBY,
-                    help="newb lobby base URL (default: marketplace.useflair.io)")
-    ap.add_argument("--token", default=os.environ.get("NEWB_MARKETPLACE_PUBLISH_TOKEN"),
+                    help="flair lobby base URL (default: marketplace.useflair.io)")
+    ap.add_argument("--token", default=os.environ.get("FLAIR_MARKETPLACE_PUBLISH_TOKEN"),
                     help="(legacy/CI) publish token to push straight to the executor, "
                          "skipping sign-in")
     ap.add_argument("--host", default=DEFAULT_HOST,
                     help="executor host for the --token path")
     # Ticketed publish (works headless — Cowork, SSH, CI). Identity comes from
-    # the newb-marketplace MCP connector's OAuth, NOT from this script:
+    # the flair-marketplace MCP connector's OAuth, NOT from this script:
     #   1. --prepare        tar the bundle, print its sha256 + tarball path
     #   2. call the connector tool `request_publish(sha256)` → upload_url
     #      (first use prompts you to connect/sign in — that's the only auth)
@@ -346,7 +346,7 @@ def main() -> None:
         print(f"tarball: {out}")
         print(f"sha256:  {sha}")
         print(f"size:    {len(tar)} bytes")
-        print("\nNext: call the newb-marketplace tool  request_publish(sha256=…)")
+        print("\nNext: call the flair-marketplace tool  request_publish(sha256=…)")
         print("(first use will prompt you to connect/sign in — that's the only auth)")
         print(f"then:  python3 scripts/publish_agent.py --upload {out} \"<upload_url>\"")
         return

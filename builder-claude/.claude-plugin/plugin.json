@@ -1,7 +1,7 @@
 {
   "name": "flair-builder",
   "displayName": "flair builder",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Build and publish your own expert agent to the flair marketplace.",
   "author": {
     "name": "flair",
