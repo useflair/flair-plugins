@@ -10,7 +10,7 @@
       "name": "flair-builder",
       "source": "./builder-claude",
       "description": "Build and publish your own expert agent to the flair marketplace.",
-      "version": "0.5.10",
+      "version": "0.5.11",
       "homepage": "https://useflair.io",
       "repository": "https://github.com/useflair/flair-plugins",
       "license": "MIT",
