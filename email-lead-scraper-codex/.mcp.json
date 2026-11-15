@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "email-lead-scraper": {
-      "type": "http",
-      "url": "https://agents.useflair.io/mcp/email-lead-scraper/"
-    }
-  }
-}
