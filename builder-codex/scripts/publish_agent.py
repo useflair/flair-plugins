@@ -258,7 +258,7 @@ def _oauth_login(lobby: str) -> str:
 # This used to hard-block on uncommitted local changes, reasoning that
 # publishing bypasses git so there'd be no version-controlled record of what
 # shipped. That's wrong: the lobby's upload route (bundle-archive.ts) commits
-# this exact source into newbworks/flair's agents/<slug>/ via the GitHub Git
+# this exact source into useflair/flair's agents/<slug>/ via the GitHub Git
 # Data API on EVERY publish (one clean commit, deduped if identical) —
 # regardless of this machine's git state. That IS the durable record,
 # unconditionally, so this machine's git status has no bearing on it. The

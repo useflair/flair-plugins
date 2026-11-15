@@ -46,7 +46,7 @@ from pathlib import Path
 # (LangGraph + the SQLite checkpoint), so graph services run locally too.
 DEFAULT_SPEC = os.environ.get(
     "FLAIR_DEV_INSTALL_SPEC",
-    "useflair[temporal,graph] @ git+https://github.com/newbworks/flair.git")
+    "useflair[temporal,graph] @ git+https://github.com/useflair/flair.git")
 VENV_DIR = Path(os.environ.get(
     "FLAIR_DEV_VENV", str(Path.home() / ".flair" / "dev-venv")))
 ENTRY = "flair-dev-server"
