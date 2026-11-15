@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Sync installable per-agent plugins in this marketplace from the newb catalog.
+"""Sync installable per-agent plugins in this marketplace from the flair catalog.
 
 Reads the executor's public catalog (`/catalog.json`) and, for every *published*
 expert agent, (re)generates a thin per-agent wrapper plugin in both Claude
 (`<slug>-claude/`) and Codex (`<slug>-codex/`) form and upserts both marketplace
-indexes. Stdlib only — no `newb` dependency — so it runs in plain CI.
+indexes. Stdlib only — no `useflair` dependency — so it runs in plain CI.
 
 Safety:
-- Only touches wrappers it generated (marked with a `.newb-generated` file).
+- Only touches wrappers it generated (marked with a `.flair-generated` file).
   Hand-maintained plugins (`flair-builder`, a curated
   `recruiting-copilot`, …) have no marker and are left completely alone.
 - Prunes generated wrappers whose agent has left the catalog.
@@ -26,7 +26,7 @@ import urllib.request
 from pathlib import Path
 
 REPO = "https://github.com/newbworks/newb-plugins"
-MARKER = ".newb-generated"
+MARKER = ".flair-generated"
 AUTHOR = {"name": "flair", "url": "https://useflair.io"}
 # Per-agent storefront host — used for each wrapper's `homepage`/`websiteURL`.
 # Must be per-agent, not the generic site-wide homepage: Claude Desktop's
@@ -105,7 +105,7 @@ description: {a['description']}
 This plugin is a thin wrapper around the **{a['display_name']}** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`{endpoint}`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 
@@ -197,7 +197,7 @@ def remove_from_index(path: Path, name: str) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--catalog-url", required=True, help="URL or path to catalog.json")
-    ap.add_argument("--root", default=".", help="newb-plugins repo root")
+    ap.add_argument("--root", default=".", help="plugins repo root")
     args = ap.parse_args()
 
     root = Path(args.root)

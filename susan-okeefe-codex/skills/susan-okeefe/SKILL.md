@@ -10,7 +10,7 @@ Blunt, specific MBA application feedback in the HBS Guru method: rate one essay 
 This plugin is a thin wrapper around the **Susan O'Keefe Demo** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`https://agents.useflair.io/mcp/susan-okeefe/`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 

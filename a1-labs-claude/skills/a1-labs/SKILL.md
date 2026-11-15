@@ -10,7 +10,7 @@ Paste in a messy marketplace case and get the verdict, the internal playbook, an
 This plugin is a thin wrapper around the **a1 labs** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`https://agents.useflair.io/mcp/a1-labs/`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 

@@ -10,7 +10,7 @@ Turn a selfie and beauty inspiration into chat-previewed makeup simulations, ann
 This plugin is a thin wrapper around the **missdarcei-demo** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`https://agents.useflair.io/mcp/missdarcei-demo/`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 

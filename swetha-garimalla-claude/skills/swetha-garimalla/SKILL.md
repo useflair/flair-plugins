@@ -10,7 +10,7 @@ Assesses AI-native biotech companies from their SEC filings, pipeline, patents, 
 This plugin is a thin wrapper around the **Swetha Garimalla — AI Biotech Viability** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`https://agents.useflair.io/mcp/swetha-garimalla/`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 

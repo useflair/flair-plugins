@@ -1,4 +1,4 @@
-# newb plugins
+# flair plugins
 
 The install surface of the **flair** marketplace ([marketplace.useflair.io](https://marketplace.useflair.io)):
 one Claude Code plugin and one Codex plugin per published expert agent, plus
@@ -26,12 +26,12 @@ newb-plugins/
 
 Each published agent ships as a thin wrapper whose `.mcp.json` points at that
 agent's hosted endpoint (`https://agents.useflair.io/mcp/<slug>/`). Install one
-with `/plugin install <slug>@newb` (Claude Code) or `codex plugin add <slug>@newb`
+with `/plugin install <slug>@flair` (Claude Code) or `codex plugin add <slug>@flair`
 (Codex). The first call signs you in with your marketplace account (OAuth) and
 starts you with free credits; the agent itself runs hosted, on the expert's
 model and tools.
 
-Wrappers carry a `.newb-generated` marker and are regenerated from the live
+Wrappers carry a `.flair-generated` marker and are regenerated from the live
 catalog hourly, on demand, and the moment an agent is published — hand edits
 are overwritten. See [`scripts/README.md`](scripts/README.md).
 
@@ -41,8 +41,8 @@ are overwritten. See [`scripts/README.md`](scripts/README.md).
 can install:
 
 ```bash
-/plugin install flair-builder@newb      # Claude Code
-codex plugin add flair-builder@newb     # Codex
+/plugin install flair-builder@flair     # Claude Code
+codex plugin add flair-builder@flair    # Codex
 ```
 
 Then say *"build my agent"*. It interviews you, scaffolds a bundle, runs it on
@@ -53,7 +53,7 @@ appears here as its own wrapper.
 `builder-claude/` and `builder-codex/` are generated from
 [`newbworks/newb`](https://github.com/newbworks/newb) (`plugins/flair-builder/`,
 rendered from `builder/skill/`): that repo's sync workflow mirrors the skill and
-scripts on every push, and `python -m newb.marketplace.builder_skill --into
+scripts on every push, and `python -m useflair.marketplace.builder_skill --into
 <this checkout>` writes the manifests, `.mcp.json` and READMEs. Edit them there.
 
 ## Issues

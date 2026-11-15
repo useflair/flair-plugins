@@ -10,7 +10,7 @@ Finds fresh, verified-email leads matching your description every day and adds t
 This plugin is a thin wrapper around the **Daily Email Lead Finder** expert agent,
 which runs **hosted** on the flair marketplace. The reasoning happens
 server-side; this plugin connects your app to it over MCP (`https://agents.useflair.io/mcp/email-lead-scraper/`). Using
-it signs you in to newb.
+it signs you in to flair.
 
 ## What it can do
 
