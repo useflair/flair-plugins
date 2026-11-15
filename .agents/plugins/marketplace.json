@@ -16,32 +16,6 @@
       },
       "category": "Developer Tools",
       "description": "Build and publish your own expert agent to the flair marketplace."
-    },
-    {
-      "name": "missdarcei-demo",
-      "source": {
-        "source": "local",
-        "path": "./missdarcei-demo-codex"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Beauty & Personal Care",
-      "description": "Turn a selfie and beauty inspiration into chat-previewed makeup simulations, annotated placement maps, and a sourced personalized plan."
-    },
-    {
-      "name": "susan-okeefe",
-      "source": {
-        "source": "local",
-        "path": "./susan-okeefe-codex"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Education",
-      "description": "Blunt, specific MBA application feedback in the HBS Guru method: rate one essay on the Four Levels for free, then get a full-application sanity check, a ding report, or an interview prep brief \u2014 with Susan one escalation away for the call."
     }
   ]
 }

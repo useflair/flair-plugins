@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "missdarcei-demo": {
-      "type": "http",
-      "url": "https://agents.useflair.io/mcp/missdarcei-demo/"
-    }
-  }
-}

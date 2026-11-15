@@ -21,42 +21,6 @@
         "marketplace",
         "builder"
       ]
-    },
-    {
-      "name": "missdarcei-demo",
-      "source": "./missdarcei-demo-claude",
-      "description": "Turn a selfie and beauty inspiration into chat-previewed makeup simulations, annotated placement maps, and a sourced personalized plan.",
-      "version": "0.2.5",
-      "homepage": "https://marketplace.useflair.io/agents/missdarcei-demo",
-      "repository": "https://github.com/useflair/flair-plugins",
-      "license": "MIT",
-      "category": "Beauty & Personal Care",
-      "tags": [
-        "makeup",
-        "melanin-rich skin",
-        "K-beauty",
-        "virtual try-on",
-        "shade matching",
-        "beauty routine"
-      ]
-    },
-    {
-      "name": "susan-okeefe",
-      "source": "./susan-okeefe-claude",
-      "description": "Blunt, specific MBA application feedback in the HBS Guru method: rate one essay on the Four Levels for free, then get a full-application sanity check, a ding report, or an interview prep brief \u2014 with Susan one escalation away for the call.",
-      "version": "0.1.2",
-      "homepage": "https://marketplace.useflair.io/agents/susan-okeefe",
-      "repository": "https://github.com/useflair/flair-plugins",
-      "license": "MIT",
-      "category": "Education",
-      "tags": [
-        "mba-admissions",
-        "hbs",
-        "stanford-gsb",
-        "wharton",
-        "essays",
-        "interview-prep"
-      ]
     }
   ]
 }
