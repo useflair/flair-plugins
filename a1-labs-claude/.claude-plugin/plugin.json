@@ -8,7 +8,7 @@
     "url": "https://useflair.io"
   },
   "homepage": "https://marketplace.useflair.io/marketplace/agents/a1-labs",
-  "repository": "https://github.com/newbworks/newb-plugins",
+  "repository": "https://github.com/newbworks/flair-plugins",
   "license": "MIT",
   "keywords": [
     "trust-and-safety",

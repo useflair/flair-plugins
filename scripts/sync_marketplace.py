@@ -25,7 +25,7 @@ import shutil
 import urllib.request
 from pathlib import Path
 
-REPO = "https://github.com/newbworks/newb-plugins"
+REPO = "https://github.com/newbworks/flair-plugins"
 MARKER = ".flair-generated"
 AUTHOR = {"name": "flair", "url": "https://useflair.io"}
 # Per-agent storefront host — used for each wrapper's `homepage`/`websiteURL`.

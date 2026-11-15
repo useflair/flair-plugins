@@ -357,7 +357,7 @@ With no shell on the bundle's host (Cowork and similar sandboxes), call
 **`dev_prepare_publish`** instead: it tars the loaded bundle in-process and
 returns its sha256 (+ base64 when small enough) to pass straight to the
 connector's `publish_bundle`. Local git state never gates a publish: the
-upload route archives the exact source into `newbworks/newb`'s
+upload route archives the exact source into `newbworks/flair`'s
 `agents/<slug>/` on every publish.
 
 ## Workflow tools (local only, not publishable)

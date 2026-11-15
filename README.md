@@ -6,14 +6,14 @@ one Claude Code plugin and one Codex plugin per published expert agent, plus
 marketplace indexes live at the repo root, so one command adds everything:
 
 ```bash
-/plugin marketplace add newbworks/newb-plugins          # Claude Code
-codex plugin marketplace add newbworks/newb-plugins     # Codex
+/plugin marketplace add newbworks/flair-plugins          # Claude Code
+codex plugin marketplace add newbworks/flair-plugins     # Codex
 ```
 
 ## Layout
 
 ```
-newb-plugins/
+flair-plugins/
   .claude-plugin/marketplace.json    # Claude Code index
   .agents/plugins/marketplace.json   # Codex index
   builder-claude/                    # flair-builder for Claude Code
@@ -51,11 +51,11 @@ Python scripts under `builder-*/scripts/`, no CLI or repo needed. The agent then
 appears here as its own wrapper.
 
 `builder-claude/` and `builder-codex/` are generated from
-[`newbworks/newb`](https://github.com/newbworks/newb) (`plugins/flair-builder/`,
+[`newbworks/flair`](https://github.com/newbworks/flair) (`plugins/flair-builder/`,
 rendered from `builder/skill/`): that repo's sync workflow mirrors the skill and
 scripts on every push, and `python -m useflair.marketplace.builder_skill --into
 <this checkout>` writes the manifests, `.mcp.json` and READMEs. Edit them there.
 
 ## Issues
 
-Report issues at https://github.com/newbworks/newb-plugins/issues.
+Report issues at https://github.com/newbworks/flair-plugins/issues.

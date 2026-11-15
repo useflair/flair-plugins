@@ -7,7 +7,7 @@
     "url": "https://useflair.io"
   },
   "homepage": "https://marketplace.useflair.io/marketplace/agents/shal",
-  "repository": "https://github.com/newbworks/newb-plugins",
+  "repository": "https://github.com/newbworks/flair-plugins",
   "license": "MIT",
   "keywords": [
     "web-development",
