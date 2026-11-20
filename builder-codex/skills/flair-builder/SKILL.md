@@ -128,6 +128,12 @@ this order, per service:
 }
 ```
 
+An intake question can also be typed, so the client gets the right control
+instead of a text box: `{"question": "Attach your brief as a PDF.", "type":
+"file"}`, `{"question": "Which city?", "type": "choice", "options": [...]}` (a
+long list is searched), `slider`, `number`, `yes_no`, `date`, `long_text`. Ask
+first for the file the agent can read, then only what that file cannot say.
+
 ## Pricing and models
 
 - 1 credit = 1¢. The platform takes 20% off the top; the expert nets
