@@ -97,14 +97,12 @@ this order, per service:
    for one, analyze what makes it good, draft, show the expert, iterate.
    "The CSV has a numeric price column", never "the output looks good" — the
    grader is literal. The rubric is public: it is the service's promise on
-   the agent card, and success-fee services are graded against it.
-5. **Pricing** — `billing`: `"flat"` (sticker on every completed run),
-   `"success_fee"` (sticker only when an independent grader marks the
-   deliverable satisfied against the rubric; unsatisfied runs are free for
-   the buyer and escalate to the expert's inbox), or `"usage"` (no sticker;
-   a multiple of compute — for cheap sample services and open-ended chat).
-   A success fee fits deliverable-shaped services with checkable criteria;
-   `max_iterations` (1–10, default 3) is its revise-on-feedback budget.
+   the agent card, and the eval judge grades against it.
+5. **Pricing** — `billing`: `"flat"` (sticker on every completed run) or
+   `"usage"` (no sticker; a multiple of compute — for cheap sample services
+   and open-ended chat). flair offers no success fee: never propose or
+   write `"success_fee"`, even if the expert asks to be paid only when the
+   client is happy — offer a flat fee instead.
    A **live voice call** is its own kind of service: `"mode": "voice"` with
    `"billing": "per_minute"` and `price_credits` per minute (a mock
    interview, a coaching session, a rehearsal). The buyer starts it from
@@ -121,9 +119,8 @@ this order, per service:
               "upfront": false },
   "expected_duration": "8m",
   "rubric_file": "rubrics/review.md",
-  "billing": "success_fee",
+  "billing": "flat",
   "price_credits": 300,
-  "max_iterations": 3,
   "model": "anthropic/claude-sonnet-4.5"
 }
 ```
@@ -138,8 +135,7 @@ first for the file the agent can read, then only what that file cannot say.
 
 - 1 credit = 1¢. The platform takes 20% off the top; the expert nets
   `sticker × 0.8 − compute`. A service cannot publish below its **floor**
-  (`compute(p95) / 0.8`; for a success fee `max_iterations × (compute +
-  grader) / 0.8`). **Validate** prints floors, estimated compute, a suggested
+  (`compute(p95) / 0.8`). **Validate** prints floors, estimated compute, a suggested
   price (≈9× compute) and take-home per service; **test runs** are the
   compute samples the floor is built from.
 - "Free to try" is `free_credits_grant`, never `price_credits: 0` — a
@@ -313,8 +309,8 @@ so a change to SKILL.md or the service can be checked instead of hoped:
                               {"max_cost_usd": 1.5}, {"max_duration_s": 600} ] } }
 ```
 
-- `judge` grades the deliverable against the rubric exactly like a success
-  fee would (separate context, cheap model); omit it to use the service's
+- `judge` grades the deliverable against the rubric in a separate context
+  on a cheap model; omit it to use the service's
   own rubric. `trajectory` assertions check the recorded run: `called_tool`
   / `not_called_tool` (glob on `server/tool`), `output_contains`,
   `output_not_contains`, `output_regex`, `max_cost_usd`, `max_duration_s`,
@@ -333,8 +329,8 @@ On this surface: cases are files under `evals/cases/` in the bundle.
 `dev_eval_promote(task_id)` turns a `dev_call` run into one; `dev_eval_run`
 runs a batch (it waits a little, then hands you the batch id — poll
 `dev_eval_results`). Runs AND the rubric judge use the expert's own Claude
-Code login, like every single model call here (`steps` stages, success-fee
-grading): no key needed. A model pinned to a non-Anthropic gateway slug runs
+Code login, like every single model call here (`steps` stages, `grade`
+nodes): no key needed. A model pinned to a non-Anthropic gateway slug runs
 on the CLI's default locally, and the report says so.
 
 ## Returning an image or file
