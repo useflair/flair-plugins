@@ -192,6 +192,30 @@ client's GitHub for the PR.
   "consumer_connections": ["github", "vercel"] }
 ```
 
+### Fast starts and what the client sees while it works
+
+- **`mcp_servers`** (per service): the `.mcp.json` server names this
+  service uses. A run waits for every server it is given to start before
+  the model begins, so list only what the service needs; leave it out to
+  start them all. Publish refuses a name `.mcp.json` doesn't declare.
+- **`progress`** (per service, up to 8): the status lines the client sees
+  while the service works, in the expert's words, instead of generic
+  "Running commands…" notes. Each line shows when the agent makes a tool
+  call whose name or input contains `when`: a script (`"letter.mjs
+  render"`), an MCP tool (`"image-generation/generate_image"`), or
+  `"start"` for the opening line. The lines are public, so write what the
+  client gets ("Reading your Common App"), never how ("Scoring the GPA
+  against the cutoff table").
+
+```json
+{ "id": "letter", "description": "A letter of continued interest, designed.",
+  "mcp_servers": ["image-generation"],
+  "progress": [
+    { "label": "Reading your Common App", "when": "start" },
+    { "label": "Writing your letter", "when": "letter.mjs lint" },
+    { "label": "Designing your page", "when": "letter.mjs render" } ] }
+```
+
 **Secrets on this surface:** a server the expert has already connected in
 Claude Code satisfies the declaration for local runs, and `dev_use` says
 which it found. Anything else goes in a `.env` beside the bundle (never
