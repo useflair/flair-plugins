@@ -55,7 +55,9 @@ def main() -> int:
     print(f"  price: {m.price_credits} credits/run  ·  free grant: {m.free_credits_grant}")
     print("\nDerived A2A Agent Card:")
     print(json.dumps(
-        bundle.agent_card(url="https://gateway.useflair.io/a2a/" + m.name), indent=2
+        # Spelled out (not bundle.agent_endpoint) so an older installed
+        # useflair still runs this script: the agent's hosted MCP endpoint.
+        bundle.agent_card(url="https://agents.useflair.io/mcp/" + m.name + "/"), indent=2
     ))
     return 0
 
