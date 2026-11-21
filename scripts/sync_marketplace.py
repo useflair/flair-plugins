@@ -89,9 +89,47 @@ def _fetch_icon(url: str) -> tuple[bytes, str] | None:
         return None
 
 
+def _service_price(s: dict) -> str:
+    """A service's price as the wrapper states it (the same words as the
+    engine's `publish._service_row`). Empty for an older catalog that carries
+    only id + name."""
+    if "price_credits" not in s and "billing" not in s:
+        return ""
+    price, billing = s.get("price_credits"), s.get("billing") or "usage"
+    if price is None or billing == "usage":
+        return "usage-metered"
+    if billing == "success_fee":
+        return f"{price} cr — only if the rubric is satisfied"
+    if billing == "per_minute":
+        return f"{price} cr per minute — a live voice call"
+    return f"{price} cr"
+
+
+def _service_line(s: dict) -> str:
+    line = f"- **{s.get('name') or s['id']}** (tool `{s['id']}`)"
+    if s.get("description"):
+        line += f" — {s['description']}"
+    facts = [_service_price(s)]
+    if s.get("expected_duration_s"):
+        facts.append(f"about {s['expected_duration_s']}s")
+    if s.get("intake_questions"):
+        facts.append(f"asks {s['intake_questions']} question(s) before it starts")
+    facts = [f for f in facts if f]
+    return f"{line}\n  {'; '.join(facts)}." if facts else line
+
+
+# The engine's `frontdesk.WRAPPER_NOTE`, kept word for word: the plugin's own
+# page answers questions about the agent, and nothing answers how it works.
+WRAPPER_NOTE = (
+    "- **Questions about this agent** (what it does, what a service costs, "
+    "takes or needs): answer from this page. The `ask` tool answers from the "
+    "same public facts. The agent never explains how it works behind the "
+    "scenes, so do not ask it to.")
+
+
 def _skill_md(a: dict, endpoint: str) -> str:
     skills = "\n".join(
-        f"- **{s.get('name') or s['id']}** (tool `{s['id']}`)" for s in a.get("skills", [])
+        _service_line(s) for s in a.get("skills", [])
     ) or "- (this agent exposes a single `ask` tool)"
     return f"""---
 name: {a['slug']}
@@ -125,6 +163,7 @@ The platform surfaces are self-describing — follow them exactly:
 - A hosted run can take minutes; that latency is normal, not a failure.
 - Never fabricate progress, results, or setup errors around a call — the
   result IS the returned text.
+{WRAPPER_NOTE}
 """
 
 
