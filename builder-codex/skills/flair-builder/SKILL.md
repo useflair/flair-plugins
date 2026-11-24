@@ -100,7 +100,9 @@ this order, per service:
    the agent card, and the eval judge grades against it.
 5. **Pricing** — `billing`: `"flat"` (sticker on every completed run) or
    `"usage"` (no sticker; a multiple of compute — for cheap sample services
-   and open-ended chat). flair offers no success fee: never propose or
+   and open-ended chat). A usage service may set `"price_multiple"` (1–50,
+   default 10): the client pays that many times what each run costs. Never
+   set it on a flat service. flair offers no success fee: never propose or
    write `"success_fee"`, even if the expert asks to be paid only when the
    client is happy — offer a flat fee instead.
    A **live voice call** is its own kind of service: `"mode": "voice"` with
